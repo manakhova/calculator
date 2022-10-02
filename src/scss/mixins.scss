@@ -1,0 +1,23 @@
+@mixin dskt-s {
+  @media (max-width: 1440px){
+    @content;
+  }
+}
+
+@mixin tab {
+  @media (max-width: 1024px){
+    @content;
+  }
+}
+
+@mixin mob {
+  @media (max-width: 768px){
+    @content;
+  }
+}
+
+@mixin mob-s {
+  @media (max-width: 650px){
+    @content;
+  }
+}

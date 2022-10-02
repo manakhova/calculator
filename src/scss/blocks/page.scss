@@ -1,0 +1,12 @@
+.page {
+  height: 100%;
+  font-family: "Nekst", "Arial", sans-serif;
+}
+  
+.page__body {
+  min-height: 100%;
+  min-width: 320px;
+  margin: 0;
+  background-color: white;
+  color: $basic-black;
+}
