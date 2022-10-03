@@ -234,9 +234,11 @@
     }
 
     input {
+      position: relative;
+      z-index: 1;
       -webkit-appearance: none;
       height: 2px;
-      background-color: $special-bgr-gray;
+      background-color: $basic-orange;
       width: 88%;
 
       @include tab {
