@@ -2,14 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../store/action';
-import {getCreditAmount, getMonthlyPayment, resetData, getPercent} from '../utils';
+import {getCreditAmount, getMonthlyPayment, resetData} from '../utils';
 import {credit} from '../const';
+import axios from "axios";
 
   const {maxPrice, minPrice, priсeStep, minDownPaymentPercent, maxDownPaymentPercent, percentStep, minTime,  maxTime, interestRate} = credit;
 
 function Calculator(props) {
-  const {creditData, setPrice, setTime, setDownpayment, setNumber} = props;
-  const {price, downPayment, time, number} = creditData;
+  const {creditData, setPrice, setTime, setDownpayment} = props;
+  const {price, downPayment, time} = creditData;
 
   const monthlyPayment = getMonthlyPayment(price, downPayment, interestRate, time);
   const creditAmount = getCreditAmount(downPayment, time, monthlyPayment);
@@ -82,8 +83,23 @@ function Calculator(props) {
     setTime(evt.target.value);
   };
 
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+
+    const postData = {
+      carCost: price,
+      downPayment: downPayment,
+      time: time,
+      lisingCost: creditAmount,
+      monthlyPayment: monthlyPayment
+    };
+
+    axios.post(`https://eoj3r7f3r4ef6v4.m.pipedream.net`, postData, 
+      {headers: {'Content-Type': 'application/json'}});
+  };
+
   return (
-    <form className="calculator__form" action="https://eoj3r7f3r4ef6v4.m.pipedream.net" method="POST">
+    <form className="calculator__form" action="#" onSubmit={handleSubmit} method="POST">
       <div className="calculator__item calculator__item--cost">
         <label className="calculator__label" htmlFor="cost">Стоимость автомобиля</label>
         <input className="calculator__input" id="cost" type="number" onInput={handlePriceInput}
@@ -136,7 +152,10 @@ Calculator.propTypes = {
     price: PropTypes.number ,
     downPayment: PropTypes.number,
     time: PropTypes.number,
-  })
+  }),
+  setPrice: PropTypes.func.isRequired,
+  setTime: PropTypes.func.isRequired,
+  setDownpayment: PropTypes.func.isRequired,
 };
   
 const mapStateToProps = (state) => {
@@ -154,10 +173,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   setDownpayment(downpayment) {
     dispatch(ActionCreator.setDownpayment(downpayment));
-  },
-  setNumber(data) {
-    dispatch(ActionCreator.setNumber(data));
-  },
+  }
 });
   
 export {Calculator};

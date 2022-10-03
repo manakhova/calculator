@@ -4,8 +4,7 @@ const initialState = {
   creditData: {
     price: 1000000,
     downPayment: 10,
-    time: 12,
-    id: 1
+    time: 12
   }
 };
 
@@ -33,14 +32,6 @@ const reducer = (state = initialState, action) => {
         creditData: {
           ...state.creditData,
           time: Number(action.payload)
-        }
-    };
-    case ActionType.SET_NUMBER:
-      return {
-        ...state,
-        creditData: {
-          ...state.creditData,
-          id: Number(action.payload)
         }
     };
     default:

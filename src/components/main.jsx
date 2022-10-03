@@ -1,7 +1,6 @@
 import Calculator from './calculator';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../store/action';
 
 function Main(props) {
   const {creditData} = props;
@@ -9,6 +8,16 @@ function Main(props) {
     <div className="calculator">
       <h1 className="calculator__title">Рассчитайте стоимость автомобиля в&nbsp;лизинг</h1>
       <Calculator creditData={creditData}/>
+      <div>
+        <button className="calculator__button loading" type="submit">
+          <span>Оставить заявку</span>
+          <span></span>
+        </button>
+        <button className="calculator__button" type="submit" disabled>
+          <span>Оставить заявку</span>
+          <span></span>
+        </button>
+      </div>
     </div>
   );
 }

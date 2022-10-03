@@ -1,8 +1,7 @@
 export const ActionType = {
     SET_PRICE: `setPrice`,
     SET_TIME: `setTime`,
-    SET_DOWNPAYMENT: `setDownPayment`,
-    SET_NUMBER: `setNumber`
+    SET_DOWNPAYMENT: `setDownPayment`
   };
   
   
@@ -18,9 +17,5 @@ export const ActionCreator = {
   setDownpayment: (downPayment) => ({
     type: ActionType.SET_DOWNPAYMENT,
     payload: downPayment
-  }),
-  setNumber: (number) => ({
-    type: ActionType.SET_NUMBER,
-    payload: number
-  }),
+  })
 };
